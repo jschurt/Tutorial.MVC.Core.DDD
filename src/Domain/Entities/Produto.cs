@@ -8,6 +8,6 @@
         public decimal Valor { get; set; }
         public string Unidade { get; set; }
         public int idFornecedor { get; set; }
-
+        
     } //class
 } //namespace
