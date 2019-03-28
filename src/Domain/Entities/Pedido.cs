@@ -2,7 +2,7 @@
 
 namespace Domain.Entities
 {
-    public class Pedido
+    public class Pedido : EntidadeBase
     {
         public int Id { get; set; }
         public string Apelido { get; set; }
@@ -13,5 +13,9 @@ namespace Domain.Entities
 
         public int idCliente { get; set; }
 
+        public override bool EstaConsistente()
+        {
+            throw new NotImplementedException();
+        }
     } //class
 } //namespace

@@ -1,6 +1,8 @@
-﻿namespace Domain.Entities
+﻿using Domain.ValueObjects;
+
+namespace Domain.Entities
 {
-    public class Cliente
+    public class Cliente : EntidadeBase
     {
 
         public int Id { get; set; }
@@ -8,11 +10,11 @@
         public string Nome { get; set; }
         public string CPFCNPJ { get; set; }
         public string Email { get; set; }
-        public string Endereco { get; set; }
-        public string Bairro { get; set; }
-        public string Cidade { get; set; }
-        public string UF { get; set; }
-        public string CEP { get; set; }
+        public VOEndereco Endereco { get; set; }
 
+        public override bool EstaConsistente()
+        {
+            throw new System.NotImplementedException();
+        }
     } //class
 } //namespace
