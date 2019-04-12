@@ -12,6 +12,9 @@ namespace Domain.Entities.AggregationPedido
         public int idCliente { get; set; }
         public string Observacao { get; set; }
 
+        //Campos que nao serao persistidos (ignorados em FluentAPI)
+        public int QuantidadeTotalProdutos { get; set; }
+        public decimal ValorTotalProdutos { get; set; }
 
         //Propriedade Navegacao...
         public virtual Cliente Cliente { get; set; }

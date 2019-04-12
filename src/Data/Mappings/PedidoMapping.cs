@@ -12,8 +12,18 @@ namespace Data.Mappings
             builder
                 .ToTable("Pedidos");
 
+            #region Ignore fields...
+
             builder
                 .Ignore(p => p.ListaErros);
+
+            builder
+                .Ignore(p => p.QuantidadeTotalProdutos);
+
+            builder
+                .Ignore(p => p.ValorTotalProdutos);
+
+            #endregion
 
             builder
                 .HasKey(p => p.Id);
