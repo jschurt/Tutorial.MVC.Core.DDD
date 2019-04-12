@@ -3,6 +3,7 @@ using Domain.Interfaces.Repository;
 using Domain.Interfaces.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
@@ -12,31 +13,142 @@ namespace Domain.Services
     {
 
         protected readonly IRepositoryFornecedor _repositoryFornecedor;
+        protected readonly IServiceProduto _serviceProduto;
 
         public ServiceFornecedor(IRepositoryFornecedor repositoryFornecedor)
         {
             _repositoryFornecedor = repositoryFornecedor;
         } //constructor
 
-        #region Crud...
+        #region Add
 
         public Fornecedor Add(Fornecedor fornecedor)
         {
+
+            fornecedor = CheckIfReadyToAdd(fornecedor);
+            if (fornecedor.ListaErros.Count != 0)
+                return fornecedor;
+
             _repositoryFornecedor.Add(fornecedor);
             return fornecedor;
+
         } //Add
+
+        private Fornecedor CheckIfReadyToAdd(Fornecedor fornecedor)
+        {
+            if (!fornecedor.EstaConsistente())
+                return fornecedor;
+
+            fornecedor = CheckApelidoExistInsert(fornecedor);
+            fornecedor = CheckCpfCnpjExistInsert(fornecedor);
+
+            return fornecedor;
+
+        } //CheckIfReadyToAdd
+
+        private Fornecedor CheckApelidoExistInsert(Fornecedor fornecedor)
+        {
+
+            if (this.GetByApelido(fornecedor.Apelido) != null)
+                fornecedor.ListaErros.Add("Apelido ja existente.");
+
+            return fornecedor;
+
+        } //CheckApelidoExistInsert
+
+        private Fornecedor CheckCpfCnpjExistInsert(Fornecedor fornecedor)
+        {
+
+            if (this.GetByCpfCnpj(fornecedor.CpfCnpj.Numero) != null)
+                fornecedor.ListaErros.Add("CPF/CNPJ ja existente.");
+
+            return fornecedor;
+
+        } //CheckCpfCnpjExistInsert
+
+        #endregion
+
+        #region Update
 
         public Fornecedor Update(Fornecedor fornecedor)
         {
+            fornecedor = CheckIfReadyToAdd(fornecedor);
+            if (fornecedor.ListaErros.Count != 0)
+                return fornecedor;
+
             _repositoryFornecedor.Update(fornecedor);
             return fornecedor;
+
         } //Update
+
+        private Fornecedor CheckIfReadyToUpdate(Fornecedor fornecedor)
+        {
+            if (!fornecedor.EstaConsistente())
+                return fornecedor;
+
+            fornecedor = CheckApelidoExistUpdate(fornecedor);
+            fornecedor = CheckCpfCnpjExistUpdate(fornecedor);
+
+            return fornecedor;
+
+        } //CheckIfReadyToUpdate
+
+        private Fornecedor CheckApelidoExistUpdate(Fornecedor fornecedor)
+        {
+            var result = GetByApelido(fornecedor.Apelido);
+            if (result != null && result.Id != fornecedor.Id)
+                fornecedor.ListaErros.Add("Apelido ja existente.");
+
+            return fornecedor;
+
+        } //CheckApelidoExistUpdate
+
+        private Fornecedor CheckCpfCnpjExistUpdate(Fornecedor fornecedor)
+        {
+            var result = GetByCpfCnpj(fornecedor.CpfCnpj.Numero);
+            if (result != null && result.Id != fornecedor.Id)
+                fornecedor.ListaErros.Add("CPF/CNPJ ja existente.");
+
+            return fornecedor;
+
+        } //CheckCpfCnpjExistUpdate
+
+
+        #endregion
+
+        #region Remove
 
         public Fornecedor Remove(Fornecedor fornecedor)
         {
+            fornecedor = CheckIfReadyToRemove(fornecedor);
+            if (fornecedor.ListaErros.Count != 0)
+                return fornecedor;
+
             _repositoryFornecedor.Remove(fornecedor);
             return fornecedor;
+
         } //Remove
+
+        private Fornecedor CheckIfReadyToRemove(Fornecedor fornecedor)
+        {
+
+            fornecedor = CheckIfFornecedorInUse(fornecedor);
+
+            return fornecedor;
+
+        } //CheckIfReadyToRemove
+
+
+        private Fornecedor CheckIfFornecedorInUse(Fornecedor fornecedor)
+        {
+            var produtos = _serviceProduto.Search(p => p.idFornecedor == fornecedor.Id);
+            if (produtos.Any())
+                fornecedor.ListaErros.Add("Exist(m) produto(s) associado(s) a este fornecedor. Exclusao nao permitida.");
+
+            return fornecedor;
+
+        } //CheckIfFornecedorInUse
+
 
         #endregion
 

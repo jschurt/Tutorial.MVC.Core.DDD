@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Domain.Services
 {
@@ -26,6 +25,7 @@ namespace Domain.Services
 
         public Cliente Add(Cliente cliente)
         {
+
             cliente = CheckIfReadyToAdd(cliente);
             if (cliente.ListaErros.Count != 0)
                 return cliente;
@@ -73,6 +73,11 @@ namespace Domain.Services
 
         public Cliente Update(Cliente cliente)
         {
+
+            cliente = CheckIfReadyToAdd(cliente);
+            if (cliente.ListaErros.Count != 0)
+                return cliente;
+
             _repositoryCliente.Update(cliente);
             return cliente;
 
@@ -112,7 +117,7 @@ namespace Domain.Services
 
         #endregion
 
-        #region Remover
+        #region Remove
 
         public Cliente Remove(Cliente cliente)
         {
@@ -180,6 +185,7 @@ namespace Domain.Services
         public void Dispose()
         {
             _repositoryCliente.Dispose();
+            _servicePedido.Dispose();
             GC.SuppressFinalize(this);
         } //Dispose
 
