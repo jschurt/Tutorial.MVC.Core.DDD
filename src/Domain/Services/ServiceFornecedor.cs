@@ -15,9 +15,10 @@ namespace Domain.Services
         protected readonly IRepositoryFornecedor _repositoryFornecedor;
         protected readonly IServiceProduto _serviceProduto;
 
-        public ServiceFornecedor(IRepositoryFornecedor repositoryFornecedor)
+        public ServiceFornecedor(IRepositoryFornecedor repositoryFornecedor, IServiceProduto serviceProduto)
         {
             _repositoryFornecedor = repositoryFornecedor;
+            _serviceProduto = serviceProduto;
         } //constructor
 
         #region Add
@@ -72,7 +73,7 @@ namespace Domain.Services
 
         public Fornecedor Update(Fornecedor fornecedor)
         {
-            fornecedor = CheckIfReadyToAdd(fornecedor);
+            fornecedor = CheckIfReadyToUpdate(fornecedor);
             if (fornecedor.ListaErros.Count != 0)
                 return fornecedor;
 
@@ -184,6 +185,7 @@ namespace Domain.Services
         public void Dispose()
         {
             _repositoryFornecedor.Dispose();
+            _serviceProduto.Dispose();
             GC.SuppressFinalize(this);
         } //Dispose
 

@@ -74,7 +74,7 @@ namespace Domain.Services
         public Cliente Update(Cliente cliente)
         {
 
-            cliente = CheckIfReadyToAdd(cliente);
+            cliente = CheckIfReadyToUpdate(cliente);
             if (cliente.ListaErros.Count != 0)
                 return cliente;
 
@@ -117,7 +117,7 @@ namespace Domain.Services
 
         #endregion
 
-        #region Remove
+        #region Remove...
 
         public Cliente Remove(Cliente cliente)
         {

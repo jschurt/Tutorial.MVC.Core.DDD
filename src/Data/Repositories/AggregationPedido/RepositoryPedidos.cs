@@ -4,8 +4,10 @@ using Domain.Entities;
 using Domain.Entities.AggregationPedido;
 using Domain.Interfaces.Repository.Aggregation;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Data.Repositories.AggregationPedido
@@ -117,6 +119,11 @@ namespace Data.Repositories.AggregationPedido
             return itensPedido;
 
         } //GetAllItensPedido
+
+        public IEnumerable<ItemPedido> SearchItensPedido(Expression<Func<ItemPedido, bool>> predicate)
+        {
+            return _context.Set<ItemPedido>().Include(ip => ip.Produto).Where(predicate).OrderBy(ip => ip.Produto.Apelido);
+        } //SearchItensPedido
 
         #endregion
 

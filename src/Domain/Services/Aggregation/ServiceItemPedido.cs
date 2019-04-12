@@ -3,6 +3,7 @@ using Domain.Interfaces.Repository.Aggregation;
 using Domain.Interfaces.Services.Aggregation;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Domain.Services.Aggregation
@@ -55,6 +56,12 @@ namespace Domain.Services.Aggregation
             return _repositoryPedido.GetAllItensPedido(idPedido);
         } //GetItensPedido
 
+        public IEnumerable<ItemPedido> SearchItensPedido(Expression<Func<ItemPedido, bool>> predicate)
+        {
+            return _repositoryPedido.SearchItensPedido(predicate);
+        } //SearchItensPedido
+
+
         #endregion
 
         public void Dispose()
@@ -62,7 +69,6 @@ namespace Domain.Services.Aggregation
             _repositoryPedido.Dispose();
             GC.SuppressFinalize(this);
         } //Dispose
-
 
     } //class
 } //namespace
