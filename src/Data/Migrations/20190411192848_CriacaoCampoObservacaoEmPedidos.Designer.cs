@@ -164,7 +164,7 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Domain.Entities.Cliente", b =>
                 {
-                    b.OwnsOne("Domain.ValueObjects.VOCpfCnpj", "CpfCnpj", b1 =>
+                    b.OwnsOne("Domain.Entities.ValueObjects.VOCpfCnpj", "CpfCnpj", b1 =>
                         {
                             b1.Property<int>("ClienteId")
                                 .ValueGeneratedOnAdd()
@@ -184,11 +184,11 @@ namespace Data.Migrations
 
                             b1.HasOne("Domain.Entities.Cliente")
                                 .WithOne("CpfCnpj")
-                                .HasForeignKey("Domain.ValueObjects.VOCpfCnpj", "ClienteId")
+                                .HasForeignKey("Domain.Entities.ValueObjects.VOCpfCnpj", "ClienteId")
                                 .OnDelete(DeleteBehavior.Cascade);
                         });
 
-                    b.OwnsOne("Domain.ValueObjects.VOEmail", "Email", b1 =>
+                    b.OwnsOne("Domain.Entities.ValueObjects.VOEmail", "Email", b1 =>
                         {
                             b1.Property<int>("ClienteId")
                                 .ValueGeneratedOnAdd()
@@ -205,11 +205,11 @@ namespace Data.Migrations
 
                             b1.HasOne("Domain.Entities.Cliente")
                                 .WithOne("Email")
-                                .HasForeignKey("Domain.ValueObjects.VOEmail", "ClienteId")
+                                .HasForeignKey("Domain.Entities.ValueObjects.VOEmail", "ClienteId")
                                 .OnDelete(DeleteBehavior.Cascade);
                         });
 
-                    b.OwnsOne("Domain.ValueObjects.VOEndereco", "Endereco", b1 =>
+                    b.OwnsOne("Domain.Entities.ValueObjects.VOEndereco", "Endereco", b1 =>
                         {
                             b1.Property<int>("ClienteId")
                                 .ValueGeneratedOnAdd()
@@ -240,10 +240,10 @@ namespace Data.Migrations
 
                             b1.HasOne("Domain.Entities.Cliente")
                                 .WithOne("Endereco")
-                                .HasForeignKey("Domain.ValueObjects.VOEndereco", "ClienteId")
+                                .HasForeignKey("Domain.Entities.ValueObjects.VOEndereco", "ClienteId")
                                 .OnDelete(DeleteBehavior.Cascade);
 
-                            b1.OwnsOne("Domain.ValueObjects.VOUF", "UF", b2 =>
+                            b1.OwnsOne("Domain.Entities.ValueObjects.VOUF", "UF", b2 =>
                                 {
                                     b2.Property<int>("VOEnderecoClienteId")
                                         .ValueGeneratedOnAdd()
@@ -258,9 +258,9 @@ namespace Data.Migrations
 
                                     b2.ToTable("Clientes");
 
-                                    b2.HasOne("Domain.ValueObjects.VOEndereco")
+                                    b2.HasOne("Domain.Entities.ValueObjects.VOEndereco")
                                         .WithOne("UF")
-                                        .HasForeignKey("Domain.ValueObjects.VOUF", "VOEnderecoClienteId")
+                                        .HasForeignKey("Domain.Entities.ValueObjects.VOUF", "VOEnderecoClienteId")
                                         .OnDelete(DeleteBehavior.Cascade);
                                 });
                         });
@@ -268,7 +268,7 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Domain.Entities.Fornecedor", b =>
                 {
-                    b.OwnsOne("Domain.ValueObjects.VOCpfCnpj", "CpfCnpj", b1 =>
+                    b.OwnsOne("Domain.Entities.ValueObjects.VOCpfCnpj", "CpfCnpj", b1 =>
                         {
                             b1.Property<int>("FornecedorId")
                                 .ValueGeneratedOnAdd()
@@ -288,11 +288,11 @@ namespace Data.Migrations
 
                             b1.HasOne("Domain.Entities.Fornecedor")
                                 .WithOne("CpfCnpj")
-                                .HasForeignKey("Domain.ValueObjects.VOCpfCnpj", "FornecedorId")
+                                .HasForeignKey("Domain.Entities.ValueObjects.VOCpfCnpj", "FornecedorId")
                                 .OnDelete(DeleteBehavior.Cascade);
                         });
 
-                    b.OwnsOne("Domain.ValueObjects.VOEmail", "Email", b1 =>
+                    b.OwnsOne("Domain.Entities.ValueObjects.VOEmail", "Email", b1 =>
                         {
                             b1.Property<int>("FornecedorId")
                                 .ValueGeneratedOnAdd()
@@ -309,11 +309,11 @@ namespace Data.Migrations
 
                             b1.HasOne("Domain.Entities.Fornecedor")
                                 .WithOne("Email")
-                                .HasForeignKey("Domain.ValueObjects.VOEmail", "FornecedorId")
+                                .HasForeignKey("Domain.Entities.ValueObjects.VOEmail", "FornecedorId")
                                 .OnDelete(DeleteBehavior.Cascade);
                         });
 
-                    b.OwnsOne("Domain.ValueObjects.VOEndereco", "Endereco", b1 =>
+                    b.OwnsOne("Domain.Entities.ValueObjects.VOEndereco", "Endereco", b1 =>
                         {
                             b1.Property<int>("FornecedorId")
                                 .ValueGeneratedOnAdd()
@@ -344,10 +344,10 @@ namespace Data.Migrations
 
                             b1.HasOne("Domain.Entities.Fornecedor")
                                 .WithOne("Endereco")
-                                .HasForeignKey("Domain.ValueObjects.VOEndereco", "FornecedorId")
+                                .HasForeignKey("Domain.Entities.ValueObjects.VOEndereco", "FornecedorId")
                                 .OnDelete(DeleteBehavior.Cascade);
 
-                            b1.OwnsOne("Domain.ValueObjects.VOUF", "UF", b2 =>
+                            b1.OwnsOne("Domain.Entities.ValueObjects.VOUF", "UF", b2 =>
                                 {
                                     b2.Property<int>("VOEnderecoFornecedorId")
                                         .ValueGeneratedOnAdd()
@@ -362,9 +362,9 @@ namespace Data.Migrations
 
                                     b2.ToTable("Fornecedores");
 
-                                    b2.HasOne("Domain.ValueObjects.VOEndereco")
+                                    b2.HasOne("Domain.Entities.ValueObjects.VOEndereco")
                                         .WithOne("UF")
-                                        .HasForeignKey("Domain.ValueObjects.VOUF", "VOEnderecoFornecedorId")
+                                        .HasForeignKey("Domain.Entities.ValueObjects.VOUF", "VOEnderecoFornecedorId")
                                         .OnDelete(DeleteBehavior.Cascade);
                                 });
                         });

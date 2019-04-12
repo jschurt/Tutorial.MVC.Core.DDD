@@ -2,7 +2,7 @@
 using Data.Context;
 using Domain.Entities;
 using Domain.Entities.AggregationPedido;
-using Domain.Interfaces.Repository.AggregationPedido;
+using Domain.Interfaces.Repository.Aggregation;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;

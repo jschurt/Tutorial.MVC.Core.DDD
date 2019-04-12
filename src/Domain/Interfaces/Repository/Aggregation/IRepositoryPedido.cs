@@ -1,7 +1,7 @@
 ﻿using Domain.Entities.AggregationPedido;
 using System.Collections.Generic;
 
-namespace Domain.Interfaces.Repository.AggregationPedido
+namespace Domain.Interfaces.Repository.Aggregation
 {
     public interface IRepositoryPedido : IRepository<Pedido>
     {

@@ -1,5 +1,5 @@
 ﻿using Domain.Entities.Shared;
-using Domain.ValueObjects;
+using Domain.Entities.ValueObjects;
 using System.Collections.Generic;
 using System.Linq;
 
