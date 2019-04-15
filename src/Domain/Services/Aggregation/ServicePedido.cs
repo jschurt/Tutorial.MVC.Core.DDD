@@ -38,7 +38,7 @@ namespace Domain.Services.Aggregation
                 return pedido;
 
             pedido = VerifyIfExistOpenOrderInTheInsertDate(pedido);
-            pedido = VeifyIfExistItemPedidoInsert(pedido);
+            pedido = VerifyIfExistItemPedidoInsert(pedido);
             pedido = VerifyIfItemPedidoIsConsistentInsert(pedido);
 
             return pedido;
@@ -58,14 +58,14 @@ namespace Domain.Services.Aggregation
         } //VerifyIfExistOpenOrderInTheInsertDate
 
 
-        private Pedido VeifyIfExistItemPedidoInsert(Pedido pedido)
+        private Pedido VerifyIfExistItemPedidoInsert(Pedido pedido)
         {
             if (pedido.ItensPedido.Count() != 1)
                 pedido.ListaErros.Add("Na inclusao do pedido e preciso informar um item de pedido. ");
 
             return pedido;
 
-        } //VeifyIfExistItemPedidoInsert
+        } //VerifyIfExistItemPedidoInsert
 
         private Pedido VerifyIfItemPedidoIsConsistentInsert(Pedido pedido)
         {

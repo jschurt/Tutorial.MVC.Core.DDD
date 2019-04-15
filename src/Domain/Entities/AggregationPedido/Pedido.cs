@@ -68,8 +68,18 @@ namespace Domain.Entities.AggregationPedido
 
         } //ApelidoDeveTerUmTamanhoLimite
 
-
         #endregion
+
+        public Pedido VerificarSePedidoEstaEntregue(Pedido pedido)
+        {
+
+            if (pedido != null && pedido.DataEntrega != null)
+                pedido.ListaErros.Add("Pedido ja foi entregue! ");
+
+            return pedido;
+
+        } //VerificarSePedidoEstaEntregue
+
 
     } //class
 } //namespace
