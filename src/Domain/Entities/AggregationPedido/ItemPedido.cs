@@ -1,5 +1,4 @@
 ﻿using Domain.Entities.Shared;
-using System;
 
 namespace Domain.Entities.AggregationPedido
 {

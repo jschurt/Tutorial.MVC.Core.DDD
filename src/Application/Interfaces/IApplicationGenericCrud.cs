@@ -1,11 +1,11 @@
-﻿using Domain.Entities.Shared;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Domain.Interfaces.Services
+namespace Application.Interfaces
 {
-    public interface IServiceGenericCrud<T> where T : EntidadeBase
+
+    public interface IApplicationGenericCrud<T> where T : class
     {
 
         T Add(T obj);
@@ -18,4 +18,6 @@ namespace Domain.Interfaces.Services
         IEnumerable<T> Search(Expression<Func<T, bool>> predicate);
 
     } //interface
-} //namespace
+
+
+}
