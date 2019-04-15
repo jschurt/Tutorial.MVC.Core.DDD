@@ -131,6 +131,7 @@ namespace Domain.Services
 
             _repositoryProduto.Remove(produto);
             return produto;
+
         } //Remove
 
         private Produto CheckIfProdutoReadyToRemove(Produto produto)

@@ -27,6 +27,16 @@ namespace Domain.Entities.AggregationPedido
 
         } //EstaConsistente
 
+        public bool EstaConsistente(bool param)
+        {
+            QuantidadeDeveSerSuperiorAZero();
+            ProdutoDeveSerPreenchido();
+
+            return (ListaErros.Count == 0);
+
+        } //EstaConsistente
+
+
         #region Validation Methods...
 
         private void QuantidadeDeveSerSuperiorAZero()
