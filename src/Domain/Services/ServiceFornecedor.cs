@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 
 namespace Domain.Services
 {
-    public class ServiceFornecedor : IServiceGenericCrud<Fornecedor>
+    public class ServiceFornecedor : IServiceFornecedor
     {
 
         protected readonly IRepositoryFornecedor _repositoryFornecedor;

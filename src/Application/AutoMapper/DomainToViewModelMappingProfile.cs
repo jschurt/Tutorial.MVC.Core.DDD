@@ -19,22 +19,42 @@ namespace Application.AutoMapper
             //Uso ForMember para transformacoes simples
 
             CreateMap<Cliente, ClienteViewModel>()
-                .ForMember(to => to.CpfCnpj, opt => opt.MapFrom(from => from.CpfCnpj.Numero.FormatCpfCnpj()))
-                .ForMember(to => to.Email, opt => opt.MapFrom(from => from.Email.EnderecoEmail))
-                .ForMember(to => to.Endereco, opt => opt.MapFrom(from => from.Endereco.Logradouro))
-                .ForMember(to => to.Bairro, opt => opt.MapFrom(from => from.Endereco.Bairro))
-                .ForMember(to => to.Cidade, opt => opt.MapFrom(from => from.Endereco.Cidade))
-                .ForMember(to => to.UF, opt => opt.MapFrom(from => from.Endereco.UF))
-                .ForMember(to => to.CEP, opt => opt.MapFrom(from => from.Endereco.CEP));
+                .ConvertUsing((src, dest) =>
+                {
+                    return new ClienteViewModel
+                    {
+                        Id = src.Id,
+                        Apelido = src.Apelido,
+                        Nome = src.Nome,
+                        CpfCnpj = src.CpfCnpj.Numero.FormatCpfCnpj(),
+                        Email = src.Email.EnderecoEmail,
+                        Endereco = src.Endereco.Logradouro,
+                        Bairro = src.Endereco.Bairro,
+                        Cidade = src.Endereco.Cidade,
+                        UF = src.Endereco.UF.UF,
+                        CEP = src.Endereco.CEP
+                    };
+
+                });
 
             CreateMap<Fornecedor, FornecedorViewModel>()
-                .ForMember(to => to.CpfCnpj, opt => opt.MapFrom(from => from.CpfCnpj.Numero.FormatCpfCnpj()))
-                .ForMember(to => to.Email, opt => opt.MapFrom(from => from.Email.EnderecoEmail))
-                .ForMember(to => to.Endereco, opt => opt.MapFrom(from => from.Endereco.Logradouro))
-                .ForMember(to => to.Bairro, opt => opt.MapFrom(from => from.Endereco.Bairro))
-                .ForMember(to => to.Cidade, opt => opt.MapFrom(from => from.Endereco.Cidade))
-                .ForMember(to => to.UF, opt => opt.MapFrom(from => from.Endereco.UF))
-                .ForMember(to => to.CEP, opt => opt.MapFrom(from => from.Endereco.CEP));
+                .ConvertUsing((src, dest) =>
+                {
+                    return new FornecedorViewModel
+                    {
+                        Id = src.Id,
+                        Apelido = src.Apelido,
+                        Nome = src.Nome,
+                        CpfCnpj = src.CpfCnpj.Numero.FormatCpfCnpj(),
+                        Email = src.Email.EnderecoEmail,
+                        Endereco = src.Endereco.Logradouro,
+                        Bairro = src.Endereco.Bairro,
+                        Cidade = src.Endereco.Cidade,
+                        UF = src.Endereco.UF.UF,
+                        CEP = src.Endereco.CEP
+                    };
+
+                });
 
             CreateMap<Produto, ProdutoViewModel>()
                 .ForMember(to => to.Valor, opt => opt.MapFrom(from => from.Valor.Formatado("{0:#,###,##0.00}")));

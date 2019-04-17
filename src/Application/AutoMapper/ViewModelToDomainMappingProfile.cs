@@ -3,6 +3,7 @@ using AutoMapper;
 using CrossCutting.Extensions;
 using Domain.Entities;
 using Domain.Entities.AggregationPedido;
+using Domain.Entities.ValueObjects;
 using System;
 
 namespace Application.AutoMapper
@@ -19,22 +20,46 @@ namespace Application.AutoMapper
             //Uso ForMember para transformacoes simples
 
             CreateMap<ClienteViewModel, Cliente>()
-                .ForPath(to => to.CpfCnpj.Numero.SomenteNumeros(), opt => opt.MapFrom(from => from.CpfCnpj))
-                .ForPath(to => to.Email.EnderecoEmail, opt => opt.MapFrom(from => from.Email))
-                .ForPath(to => to.Endereco.Logradouro, opt => opt.MapFrom(from => from.Endereco))
-                .ForPath(to => to.Endereco.Bairro, opt => opt.MapFrom(from => from.Bairro))
-                .ForPath(to => to.Endereco.Cidade, opt => opt.MapFrom(from => from.Cidade))
-                .ForPath(to => to.Endereco.UF, opt => opt.MapFrom(from => from.UF))
-                .ForPath(to => to.Endereco.CEP.SomenteNumeros(), opt => opt.MapFrom(from => from.CEP));
+                .ConvertUsing((src, dest) =>
+                {
+                    return new Cliente
+                    {
+                        Id = src.Id,
+                        Apelido = src.Apelido,
+                        Nome = src.Nome,
+                        CpfCnpj = new VOCpfCnpj {  Numero = src.CpfCnpj.SomenteNumeros() },
+                        Email = new VOEmail { EnderecoEmail = src.Email },
+                        Endereco = new VOEndereco
+                        {
+                            Logradouro = src.Endereco,
+                            Bairro = src.Bairro,
+                            Cidade = src.Cidade,
+                            UF = new VOUF { UF = src.UF },
+                            CEP = src.CEP
+                        }
+                    };
+                });
 
             CreateMap<FornecedorViewModel, Fornecedor>()
-                .ForPath(to => to.CpfCnpj.Numero.SomenteNumeros(), opt => opt.MapFrom(from => from.CpfCnpj))
-                .ForPath(to => to.Email.EnderecoEmail, opt => opt.MapFrom(from => from.Email))
-                .ForPath(to => to.Endereco.Logradouro, opt => opt.MapFrom(from => from.Endereco))
-                .ForPath(to => to.Endereco.Bairro, opt => opt.MapFrom(from => from.Bairro))
-                .ForPath(to => to.Endereco.Cidade, opt => opt.MapFrom(from => from.Cidade))
-                .ForPath(to => to.Endereco.UF, opt => opt.MapFrom(from => from.UF))
-                .ForPath(to => to.Endereco.CEP.SomenteNumeros(), opt => opt.MapFrom(from => from.CEP));
+                .ConvertUsing((src, dest) =>
+                {
+                    return new Fornecedor
+                    {
+                        Id = src.Id,
+                        Apelido = src.Apelido,
+                        Nome = src.Nome,
+                        CpfCnpj = new VOCpfCnpj { Numero = src.CpfCnpj.SomenteNumeros() },
+                        Email = new VOEmail { EnderecoEmail = src.Email },
+                        Endereco = new VOEndereco
+                        {
+                            Logradouro = src.Endereco,
+                            Bairro = src.Bairro,
+                            Cidade = src.Cidade,
+                            UF = new VOUF { UF = src.UF },
+                            CEP = src.CEP
+                        }
+                    };
+                });
 
             CreateMap<ProdutoViewModel, Produto>()
                 .ForMember(to => to.Valor, opt => opt.MapFrom(from => from.Valor.ConvertDecimal("{0:#,###,##0.00}")));

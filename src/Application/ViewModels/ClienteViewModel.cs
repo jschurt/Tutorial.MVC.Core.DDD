@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Application.ViewModels
 {
@@ -9,6 +10,8 @@ namespace Application.ViewModels
         public List<string> ListaErrors { get; set; } = new List<string>();
         public string Apelido { get; set; }
         public string Nome { get; set; }
+
+        [Display(Name ="CPF/CNPJ")]
         public string CpfCnpj { get; set; }
         public string Email { get; set; }
         public string Endereco { get; set; }
