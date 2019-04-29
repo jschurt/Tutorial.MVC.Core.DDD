@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Cadastros\Views\Shared\" />
     <Folder Include="Areas\Pedidos\Controllers\" />
     <Folder Include="Areas\Pedidos\Views\" />
     <Folder Include="wwwroot\lib\" />

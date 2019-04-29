@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Application.Interfaces;
 using Application.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace WebUI.Areas.Cadastros.Controllers
 {
@@ -21,10 +22,17 @@ namespace WebUI.Areas.Cadastros.Controllers
 
         public IActionResult Index()
         {
-            var model = _applicationCliente.GetAll();
-
-            return View(model);
+            return View();
         } //Index
+
+
+        public JsonResult ListagemClientesJson()
+        {
+            var lista = _applicationCliente.GetAll();
+            //var lista = new { { email = "teste@teste.com"} };
+            var settings = new JsonSerializerSettings();
+            return Json(lista, settings);
+        } //ListagemClientesJson
 
     } //class
 

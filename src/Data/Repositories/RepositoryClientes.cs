@@ -1,12 +1,8 @@
-﻿using Dapper;
-using Data.Context;
+﻿using Data.Context;
 using Domain.Entities;
-using Domain.Entities.ValueObjects;
 using Domain.Interfaces.Repository;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Data.Repositories
 {

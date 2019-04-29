@@ -15,19 +15,6 @@ namespace Data.Repositories
         public RepositoryFornecedores(ContextEF _context) : base(_context)
         { } //constructor
 
-        public override IEnumerable<Fornecedor> GetAll()
-        {
-            //Adapting to use Dapper (muito mais performatico do que o EF)
-            StringBuilder query = new StringBuilder();
-            query.Append(@"SELECT * FROM Fornecedores ORDER BY id DESC");
-
-            return _context
-                .Database
-                .GetDbConnection()
-                .Query<Fornecedor>(query.ToString());
-
-        } //GetAll
-
         public override Fornecedor GetById(int id)
         {
             //Adapting to use Dapper (muito mais performatico do que o EF)
