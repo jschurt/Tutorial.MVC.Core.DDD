@@ -17,24 +17,25 @@ namespace Data.Repositories
 
         public override IEnumerable<Produto> GetAll()
         {
-            //Adapting to use Dapper (muito mais performatico do que o EF)
-            StringBuilder query = new StringBuilder();
-            query.Append(@"SELECT * FROM Produtos JOIN Fornecedores ON Produtos.idFornecedor = Fornecedores.idFornecedor ORDER BY Produto.id DESC");
 
-            var produtos = _context
-                .Database
-                .GetDbConnection()
-                //Em .Query<Classe1, Classe2, ClasseRetorno>
-                .Query<Produto, Fornecedor, Produto>(query.ToString(),
-                (P, F) => {
+            //Using linq just as example
+            var results = from p in _context.Produtos
+                          join f in _context.Fornecedores
+                          on p.idFornecedor equals f.Id
+                          select new Produto
+                          {
+                              Id = p.Id,
+                              Apelido = p.Apelido,
+                              Nome = p.Nome,
+                              Valor = p.Valor,
+                              Unidade = p.Unidade,
+                              Fornecedor = new Fornecedor
+                              {
+                                  Nome = f.Nome
+                              }
+                          };
 
-                    //Aqui estou dizendo que o objeto Fornecedor da classe Produto
-                    //ira receber o Fornecedor
-                    P.Fornecedor = F;
-                    return P;
-                });
-
-            return produtos;
+            return results.ToList();
 
         } //GetAll
 

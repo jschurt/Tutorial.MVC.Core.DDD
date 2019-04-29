@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Clientes";
+    ViewData["Title"] = "Produtos";
 }
 
 <partial name="_Aguarde" />
@@ -8,7 +8,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <a asp-area="Cadastros" asp-controller="Clientes" asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i> Create New</a>
+        <a asp-area="Cadastros" asp-controller="Produtos" asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i> Create New</a>
     </div>
 </div>
 
@@ -17,7 +17,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card">
-            <div class="card-header">Clientes</div>
+            <div class="card-header">Produtos</div>
             <div class="card-body" style="overflow-x: auto">
 
                 <table id="tbgrid" class="table table-hover table-bordered" style="width: 100%">
@@ -29,9 +29,9 @@
                             <th class="text-center">Id</th>
                             <th class="text-center">Apelido</th>
                             <th class="text-center">Nome</th>
-                            <th class="text-center">CPF/CNPJ</th>
-
-                            <th class="text-center">E-Mail</th>
+                            <th class="text-center">Valor</th>
+                            <th class="text-center">Unidade</th>
+                            <th class="text-center">Fornecedor</th>
                         </tr>
                     </thead>
                 </table>
@@ -76,7 +76,7 @@
             },
             {
                 "data": "Apelido",
-                "width": "28%",
+                "width": "24%",
                 "sClass": "text-left"
             },
             {
@@ -85,19 +85,21 @@
                 "sClass": "text-left"
             },
             {
-                "data": "CpfCnpj",
-                "width": "16%",
+                "data": "Valor",
+                "width": "10%",
+                "sType": "currency",
                 "sClass": "text-left"
             },
             {
-                "data": "Email",
-                "width": "20%",
+                "data": "NomeFornecedor",
+                "width": "18%",
                 "sClass": "text-left"
             }
+
         ];
 
         $(document).ready(function () {
-            ListagemConsulta("tbgrid", urlClientes, colunas);
+            ListagemConsulta("tbgrid", urlProdutos, colunas);
         });
 
     </script>

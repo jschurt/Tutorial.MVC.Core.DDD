@@ -12,6 +12,7 @@ namespace Application.ViewModels
         public string Valor { get; set; }
         public string Unidade { get; set; }
         public int IdFornecedor { get; set; }
+        public string NomeFornecedor { get; set; }
 
     } //class
 

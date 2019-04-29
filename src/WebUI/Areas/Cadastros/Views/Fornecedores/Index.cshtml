@@ -2,32 +2,47 @@
     ViewData["Title"] = "Fornecedores";
 }
 
-<h1>Fornecedores</h1>
+<partial name="_Aguarde" />
 
-<p>
-    <a asp-area="Cadastros" asp-controller="Fornecedores" asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i> Create New</a>
-</p>
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        <a asp-area="Cadastros" asp-controller="Fornecedores" asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i> Create New</a>
+    </div>
+</div>
+
 <hr />
 
 <div class="row">
     <div class="col-md-12">
-        <table id="tbgrid" class="table table-hover table-bordered" style="width: 100%">
-            <thead>
-                <tr>
+        <div class="card">
+            <div class="card-header">Fornecedores</div>
+            <div class="card-body" style="overflow-x: auto">
 
-                    <th class="no-sort"></th>
-                    <th class="no-sort"></th>
-                    <th class="text-center">Id</th>
-                    <th class="text-center">Apelido</th>
-                    <th class="text-center">Nome</th>
-                    <th class="text-center">CPF/CNPJ</th>
+                <table id="tbgrid" class="table table-hover table-bordered" style="width: 100%">
+                    <thead>
+                        <tr>
 
-                    <th class="text-center">E-Mail</th>
-                </tr>
-            </thead>
-        </table>
+                            <th class="no-sort"></th>
+                            <th class="no-sort"></th>
+                            <th class="text-center">Id</th>
+                            <th class="text-center">Apelido</th>
+                            <th class="text-center">Nome</th>
+                            <th class="text-center">CPF/CNPJ</th>
+
+                            <th class="text-center">E-Mail</th>
+                        </tr>
+                    </thead>
+                </table>
+
+
+            </div>
+        </div>
     </div>
 </div>
+
+
 
 @section Scripts {
 
